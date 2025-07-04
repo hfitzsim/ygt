@@ -39,7 +39,9 @@ const App = () => {
                             </Menu.Item>
                         ))}
                 </Menu>
-                <Button onClick={open}>+ Add Goal</Button>
+                <Button onClick={open} maw={200}>
+                    + Add Goal
+                </Button>
             </Stack>
 
             <Modal opened={opened} onClose={close} title='Add Goal'>
@@ -66,7 +68,7 @@ const App = () => {
                             key={form.key('count')}
                             {...form.getInputProps('count')}
                         />
-                        <Button type='submit' onClick={handleSubmit}>
+                        <Button type='submit' onClick={handleSubmit} maw={200}>
                             Add
                         </Button>
                     </Stack>
