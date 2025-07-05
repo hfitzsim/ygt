@@ -7,7 +7,11 @@ export async function fetchAllGoals() {
 }
 
 export async function fetchGoalById(id: string) {
-    const { data, error } = await supabase.from('goals').select('*').eq('id', id).single();
+    const { data, error } = await supabase
+        .from('goals')
+        .select('*')
+        .eq('id', id)
+        .single();
     if (error) throw error;
     return data;
 }
@@ -20,7 +24,11 @@ export async function createGoal(goal: any) {
 
 export async function incrementProgress(id: string) {
     // Fetch current count
-    const { data, error } = await supabase.from('goals').select('count').eq('id', id).single();
+    const { data, error } = await supabase
+        .from('goals')
+        .select('count')
+        .eq('id', id)
+        .single();
 
     if (error) throw error;
 
@@ -39,7 +47,11 @@ export async function incrementProgress(id: string) {
 
 export async function decrementProgress(id: string) {
     // Fetch current count
-    const { data, error } = await supabase.from('goals').select('count').eq('id', id).single();
+    const { data, error } = await supabase
+        .from('goals')
+        .select('count')
+        .eq('id', id)
+        .single();
 
     if (error) throw error;
 
@@ -56,7 +68,7 @@ export async function decrementProgress(id: string) {
     return updated;
 }
 
-export async function deleteGoal(id: number) {
+export async function deleteGoal(id: string) {
     const { error } = await supabase.from('goals').delete().eq('id', id);
     if (error) throw error;
 }

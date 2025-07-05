@@ -12,6 +12,12 @@ import { useDecrementProgress } from '../hooks/useDecrementProgres.ts';
 import { useParams } from 'react-router-dom';
 import { useGoalById } from '../hooks/useGoalById.ts';
 import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+    faPlus,
+    faMinus,
+    faChevronLeft,
+} from '@fortawesome/free-solid-svg-icons';
 
 const Progress = () => {
     const navigate = useNavigate();
@@ -30,8 +36,12 @@ const Progress = () => {
 
     return (
         <Container mt={30}>
-            <Button onClick={() => navigate('/')} w={100} variant='transparent'>
-                {`< Back`}
+            <Button
+                onClick={() => navigate('/')}
+                w={100}
+                variant='transparent'
+                leftSection={<FontAwesomeIcon icon={faChevronLeft} />}>
+                Back
             </Button>
             <Stack align='center'>
                 <Title order={2}>{goal?.name}</Title>
@@ -55,12 +65,16 @@ const Progress = () => {
                     <Button
                         onClick={handleDecrementProgress}
                         maw={200}
-                        variant='outline'>
-                        - Remove Progress
+                        variant='outline'
+                        leftSection={<FontAwesomeIcon icon={faMinus} />}>
+                        Remove Progress
                     </Button>
 
-                    <Button onClick={handleIncrementProgress} maw={200}>
-                        + Add Progress
+                    <Button
+                        onClick={handleIncrementProgress}
+                        maw={200}
+                        leftSection={<FontAwesomeIcon icon={faPlus} />}>
+                        Add Progress
                     </Button>
                 </Group>
             </Stack>
