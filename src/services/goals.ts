@@ -81,7 +81,7 @@ export async function decrementProgress(id: string) {
 
 export async function setProgress(id: string, count: number) {
     // Fetch current count
-    const { data, error } = await supabase
+    const { _data, error } = await supabase
         .from('goals')
         .select('count')
         .eq('id', id)

@@ -34,8 +34,6 @@ const App = () => {
     const [opened, { open, close }] = useDisclosure(false);
     const [editOpened, setEditOpened] = useState(false);
 
-    const [selectedGoal, setSelectedGoal] = useState<Goal | null>(null);
-
     const addForm = useForm({
         initialValues: {
             name: '',
