@@ -7,6 +7,7 @@ export async function fetchAllGoals() {
 }
 
 export async function fetchGoalById(id: string) {
+    console.log('fetching goal', id);
     const { data, error } = await supabase
         .from('goals')
         .select('*')
@@ -18,6 +19,16 @@ export async function fetchGoalById(id: string) {
 
 export async function createGoal(goal: any) {
     const { data, error } = await supabase.from('goals').insert(goal).single();
+    if (error) throw error;
+    return data;
+}
+
+export async function editGoal(goal: any) {
+    const { data, error } = await supabase
+        .from('goals')
+        .update({ name: goal.name, goal: goal.goal })
+        .eq('id', goal.id)
+        .single();
     if (error) throw error;
     return data;
 }
