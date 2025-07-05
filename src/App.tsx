@@ -86,7 +86,10 @@ const App = () => {
                                                 value:
                                                     (goal.count / goal.goal) *
                                                     100,
-                                                color: 'teal',
+                                                color:
+                                                    goal.count === 0
+                                                        ? 'grey'
+                                                        : 'teal',
                                             },
                                         ]}
                                         size={40}

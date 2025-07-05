@@ -52,7 +52,7 @@ const Progress = () => {
                     sections={[
                         {
                             value: (goal?.count / goal?.goal) * 100,
-                            color: 'teal',
+                            color: goal?.count === 0 ? 'grey' : 'teal',
                         },
                     ]}
                     label={
