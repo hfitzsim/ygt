@@ -1,4 +1,12 @@
-import { Stack, Container, Button, RingProgress, Text, Group } from '@mantine/core';
+import {
+    Stack,
+    Container,
+    Button,
+    RingProgress,
+    Text,
+    Group,
+    Title,
+} from '@mantine/core';
 import { useIncrementProgress } from '../hooks/useIncrementProgress.ts';
 import { useDecrementProgress } from '../hooks/useDecrementProgres.ts';
 import { useParams } from 'react-router-dom';
@@ -21,25 +29,36 @@ const Progress = () => {
     };
 
     return (
-        <Container>
-            <Stack>
-                <Button onClick={() => navigate('/')} w={100}>
-                    {`< Back`}
-                </Button>
-                <Text>{goal?.name}</Text>
+        <Container mt={30}>
+            <Button onClick={() => navigate('/')} w={100} variant='transparent'>
+                {`< Back`}
+            </Button>
+            <Stack align='center'>
+                <Title order={2}>{goal?.name}</Title>
+                <RingProgress
+                    roundCaps
+                    size={280}
+                    thickness={20}
+                    sections={[
+                        {
+                            value: (goal?.count / goal?.goal) * 100,
+                            color: 'teal',
+                        },
+                    ]}
+                    label={
+                        <Text c='jet' fw={200} ta='center' size='md'>
+                            {goal?.count} / {goal?.goal} days
+                        </Text>
+                    }
+                />{' '}
                 <Group>
-                    <Button onClick={handleDecrementProgress} maw={200}>
+                    <Button
+                        onClick={handleDecrementProgress}
+                        maw={200}
+                        variant='outline'>
                         - Remove Progress
                     </Button>
-                    <RingProgress
-                        roundCaps
-                        sections={[{ value: (goal?.count / goal?.goal) * 100, color: 'teal' }]}
-                        label={
-                            <Text c='jet' fw={200} ta='center' size='md'>
-                                {goal?.count} / {goal?.goal} days
-                            </Text>
-                        }
-                    />{' '}
+
                     <Button onClick={handleIncrementProgress} maw={200}>
                         + Add Progress
                     </Button>

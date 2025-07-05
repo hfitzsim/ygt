@@ -1,4 +1,16 @@
-import { Container, Button, Title, Modal, NumberInput, TextInput, Stack, Menu } from '@mantine/core';
+import {
+    Container,
+    Button,
+    Title,
+    Modal,
+    NumberInput,
+    TextInput,
+    Stack,
+    Menu,
+    Group,
+    Text,
+    RingProgress,
+} from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { useForm } from '@mantine/form';
 import { useGoals } from './hooks/useGoals';
@@ -20,7 +32,7 @@ const App = () => {
 
     const { data } = useGoals();
 
-    const { mutate, isPending, error } = useCreateGoal();
+    const { mutate } = useCreateGoal();
 
     function handleSubmit() {
         mutate(form.getValues());
@@ -28,14 +40,34 @@ const App = () => {
     }
 
     return (
-        <Container>
-            <Stack>
+        <Container mt={30}>
+            <Stack align='flex-start' p={0}>
                 <Title order={1}>Goals</Title>
                 <Menu>
                     {data &&
                         data.map((goal: any) => (
-                            <Menu.Item key={goal.id} onClick={() => navigate(`/${goal.id}`)}>
-                                {goal.name}
+                            <Menu.Item
+                                key={goal.id}
+                                onClick={() => navigate(`/${goal.id}`)}
+                                style={{
+                                    border: '1px solid black',
+                                }}>
+                                <Group justify='space-between'>
+                                    <Text>{goal.name}</Text>
+                                    <RingProgress
+                                        roundCaps
+                                        sections={[
+                                            {
+                                                value:
+                                                    (goal.count / goal.goal) *
+                                                    100,
+                                                color: 'teal',
+                                            },
+                                        ]}
+                                        size={40}
+                                        thickness={8}
+                                    />
+                                </Group>
                             </Menu.Item>
                         ))}
                 </Menu>
@@ -50,7 +82,7 @@ const App = () => {
                         <TextInput
                             withAsterisk
                             label='Goal Name'
-                            placeholder='day in the gym'
+                            placeholder='New Goal'
                             key={form.key('name')}
                             {...form.getInputProps('name')}
                         />
