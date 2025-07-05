@@ -103,7 +103,6 @@ const App = () => {
                                             <Menu.Dropdown>
                                                 <Menu.Item
                                                     onClick={() => {
-                                                        setSelectedGoal(goal);
                                                         editForm.setValues({
                                                             id: goal.id,
                                                             name: goal.name,
