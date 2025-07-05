@@ -48,7 +48,7 @@ const AuthForm = () => {
             password: form.getValues().password,
         };
 
-        const { error } =
+        const { data, error } =
             mode === 'signUp'
                 ? await supabase.auth.signUp(creds)
                 : await supabase.auth.signInWithPassword(creds);
@@ -56,8 +56,10 @@ const AuthForm = () => {
         if (error) {
             console.error(error);
         } else {
+            console.log(data);
             alert(
-                `Signed ${mode === 'signUp' ? 'up' : 'in'} as ${form.getValues().email}`,
+                `Signed ${mode === 'signUp' ? 'up' : 'in'} as ${form.getValues().email}.
+                ${mode === 'signUp' ? 'Check your email for a verification link.' : 'Welcome back!'}`,
             );
         }
     };
