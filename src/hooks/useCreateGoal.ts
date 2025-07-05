@@ -6,7 +6,6 @@ type GoalInput = {
     name: string;
     goal: number;
     count: number;
-    user_id: string;
 };
 
 const useCreateGoal = () => {
