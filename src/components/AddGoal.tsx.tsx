@@ -16,7 +16,7 @@ const AddGoal: React.FC<AddGoalProps> = ({
 }) => {
     return (
         <Modal opened={opened} onClose={close} title='Add Goal'>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <Stack>
                     <TextInput
                         withAsterisk
@@ -36,11 +36,11 @@ const AddGoal: React.FC<AddGoalProps> = ({
                         withAsterisk
                         label='Count'
                         description='Completed progress towards your goal'
-                        placeholder='0'
+                        min={0}
                         key={form.key('count')}
                         {...form.getInputProps('count')}
                     />
-                    <Button type='submit' onClick={handleSubmit}>
+                    <Button type='submit' onClick={form.onSubmit(handleSubmit)}>
                         Add Goal
                     </Button>
                 </Stack>

@@ -3,7 +3,6 @@ import { createRoot } from 'react-dom/client';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { MantineProvider } from '@mantine/core';
-import { ContextMenuProvider } from 'mantine-contextmenu';
 
 // components
 import App from './App.tsx';
@@ -13,7 +12,6 @@ import Progress from './components/Progress.tsx';
 import theme from './styles/theme.ts';
 import './index.scss';
 import '@mantine/core/styles.css';
-import 'mantine-contextmenu/styles.css';
 
 const queryClient = new QueryClient();
 
@@ -32,9 +30,7 @@ createRoot(document.getElementById('root')!).render(
     <StrictMode>
         <MantineProvider theme={theme}>
             <QueryClientProvider client={queryClient}>
-                <ContextMenuProvider>
-                    <RouterProvider router={router} />
-                </ContextMenuProvider>
+                <RouterProvider router={router} />
             </QueryClientProvider>
         </MantineProvider>
     </StrictMode>,

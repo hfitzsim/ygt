@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { incrementProgress } from '../services/goals.ts';
 
-export function useIncrementProgress() {
+const useIncrementProgress = () => {
     const queryClient = useQueryClient();
 
     return useMutation({
@@ -12,4 +12,6 @@ export function useIncrementProgress() {
             queryClient.invalidateQueries({ queryKey: ['goals'] });
         },
     });
-}
+};
+
+export { useIncrementProgress };

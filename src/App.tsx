@@ -15,13 +15,15 @@ import { useGoals } from './hooks/useGoals';
 import { useCreateGoal } from './hooks/useCreateGoal';
 import { useDeleteGoal } from './hooks/useDeleteGoal';
 import { useNavigate } from 'react-router-dom';
-import { useContextMenu } from 'mantine-contextmenu';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import {
+    faEllipsisVertical,
+    faPlus,
+    faTrash,
+} from '@fortawesome/free-solid-svg-icons';
 
 const App = () => {
     const [opened, { open, close }] = useDisclosure(false);
-    const { showContextMenu } = useContextMenu();
     const navigate = useNavigate();
 
     const form = useForm({
@@ -66,18 +68,32 @@ const App = () => {
                                 style={{
                                     border: '1px solid black',
                                 }}
-                                onContextMenu={() =>
-                                    showContextMenu([
-                                        {
-                                            key: 'delete',
-                                            title: 'Delete Goal',
-                                            onClick: () =>
-                                                handleDeleteGoal(goal.id),
-                                        },
-                                    ])
-                                }
-                                onClick={() => navigate(`/${goal.id}`)}>
-                                <Group justify='space-between'>
+                                rightSection={
+                                    <Menu>
+                                        <Menu.Target>
+                                            <FontAwesomeIcon
+                                                icon={faEllipsisVertical}
+                                            />
+                                        </Menu.Target>
+                                        <Menu.Dropdown>
+                                            <Menu.Item
+                                                color='red'
+                                                onClick={() =>
+                                                    handleDeleteGoal(goal.id)
+                                                }
+                                                leftSection={
+                                                    <FontAwesomeIcon
+                                                        icon={faTrash}
+                                                    />
+                                                }>
+                                                Delete Goal
+                                            </Menu.Item>
+                                        </Menu.Dropdown>
+                                    </Menu>
+                                }>
+                                <Group
+                                    justify='space-between'
+                                    onClick={() => navigate(`/${goal.id}`)}>
                                     <Text>{goal.name}</Text>
                                     <RingProgress
                                         roundCaps

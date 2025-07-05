@@ -68,6 +68,29 @@ export async function decrementProgress(id: string) {
     return updated;
 }
 
+export async function setProgress(id: string, count: number) {
+    // Fetch current count
+    const { data, error } = await supabase
+        .from('goals')
+        .select('count')
+        .eq('id', id)
+        .single();
+
+    if (error) throw error;
+
+    const newCount = count;
+
+    // Update count
+    const { data: updated, error: updateError } = await supabase
+        .from('goals')
+        .update({ count: newCount })
+        .eq('id', id)
+        .single();
+
+    if (updateError) throw updateError;
+    return updated;
+}
+
 export async function deleteGoal(id: string) {
     const { error } = await supabase.from('goals').delete().eq('id', id);
     if (error) throw error;

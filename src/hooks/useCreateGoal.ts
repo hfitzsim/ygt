@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { createGoal } from '../services/goals.ts';
 
-export function useCreateGoal() {
+const useCreateGoal = () => {
     const queryClient = useQueryClient();
 
     return useMutation({
@@ -11,4 +11,6 @@ export function useCreateGoal() {
             queryClient.invalidateQueries({ queryKey: ['goals'] });
         },
     });
-}
+};
+
+export { useCreateGoal };
