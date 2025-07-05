@@ -4,7 +4,6 @@ import { useForm, isEmail } from '@mantine/form';
 import {
     Container,
     Title,
-    Text,
     TextInput,
     PasswordInput,
     Button,
@@ -15,7 +14,6 @@ import { useDisclosure } from '@mantine/hooks';
 const AuthForm = () => {
     const [visible, { toggle }] = useDisclosure(false);
     const [mode, setMode] = useState<'signIn' | 'signUp'>('signIn');
-    const [error, setError] = useState<string | null>(null);
 
     const form = useForm({
         initialValues: {
@@ -100,11 +98,6 @@ const AuthForm = () => {
                 <Button onClick={handleSubmit}>
                     {mode === 'signUp' ? 'Sign Up' : 'Sign In'}
                 </Button>
-                {error && (
-                    <Text c='red' size='sm'>
-                        {error}
-                    </Text>
-                )}
                 <Button variant='transparent' onClick={toggleMode}>
                     {mode === 'signIn' ? 'Sign Up' : 'Sign In'}
                 </Button>
