@@ -17,11 +17,11 @@ const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
     {
-        path: '/',
+        path: '/ygt',
         element: <App />,
     },
     {
-        path: '/:id',
+        path: '/ygt/:id',
         element: <Progress />,
     },
 ]);

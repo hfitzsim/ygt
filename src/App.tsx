@@ -136,7 +136,9 @@ const App = () => {
                                     }>
                                     <Group
                                         justify='space-between'
-                                        onClick={() => navigate(`/${goal.id}`)}>
+                                        onClick={() =>
+                                            navigate(`/ygt/${goal.id}`)
+                                        }>
                                         <Text>{goal.name}</Text>
                                         <RingProgress
                                             roundCaps

@@ -56,7 +56,7 @@ const Progress = () => {
     return (
         <Container mt={30}>
             <Button
-                onClick={() => navigate('/')}
+                onClick={() => navigate('/ygt')}
                 w={100}
                 variant='transparent'
                 leftSection={<FontAwesomeIcon icon={faChevronLeft} />}>
