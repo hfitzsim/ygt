@@ -1,13 +1,15 @@
-import { supabase } from '../supabaseClient';
+import supabase from '../supabaseClient';
 
-export async function fetchAllGoals() {
-    const { data, error } = await supabase.from('goals').select('*');
+export async function fetchAllGoals(userId: string) {
+    const { data, error } = await supabase
+        .from('goals')
+        .select('*')
+        .eq('user_id', userId);
     if (error) throw error;
     return data;
 }
 
 export async function fetchGoalById(id: string) {
-    console.log('fetching goal', id);
     const { data, error } = await supabase
         .from('goals')
         .select('*')
@@ -17,8 +19,12 @@ export async function fetchGoalById(id: string) {
     return data;
 }
 
-export async function createGoal(goal: any) {
-    const { data, error } = await supabase.from('goals').insert(goal).single();
+export async function createGoal(goal: any, userId: string) {
+    console.log('userid', userId);
+    const { data, error } = await supabase
+        .from('goals')
+        .insert([{ ...goal, user_id: userId }])
+        .single();
     if (error) throw error;
     return data;
 }

@@ -3,9 +3,10 @@ import { createRoot } from 'react-dom/client';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { MantineProvider } from '@mantine/core';
+import { UserProvider } from './context/UserContext.tsx';
 
 // components
-import App from './App.tsx';
+import Root from './Root.tsx';
 import Progress from './components/Progress.tsx';
 
 // styles
@@ -18,7 +19,7 @@ const queryClient = new QueryClient();
 const router = createBrowserRouter([
     {
         path: '/ygt',
-        element: <App />,
+        element: <Root />,
     },
     {
         path: '/ygt/:id',
@@ -30,7 +31,9 @@ createRoot(document.getElementById('root')!).render(
     <StrictMode>
         <MantineProvider theme={theme}>
             <QueryClientProvider client={queryClient}>
-                <RouterProvider router={router} />
+                <UserProvider>
+                    <RouterProvider router={router} />
+                </UserProvider>
             </QueryClientProvider>
         </MantineProvider>
     </StrictMode>,
