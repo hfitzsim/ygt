@@ -50,7 +50,10 @@ const AuthForm = () => {
 
         const { data, error } =
             mode === 'signUp'
-                ? await supabase.auth.signUp(creds)
+                ? await supabase.auth.signUp({
+                      ...creds,
+                      options: { emailRedirectTo: 'https://hfitzsim.dev/ygt/' },
+                  })
                 : await supabase.auth.signInWithPassword(creds);
 
         if (error) {
