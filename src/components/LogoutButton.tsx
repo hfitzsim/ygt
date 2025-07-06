@@ -18,7 +18,8 @@ const LogoutButton = () => {
             <Button
                 variant='white'
                 onClick={handleLogout}
-                leftSection={<FontAwesomeIcon icon={faPowerOff} />}>
+                leftSection={<FontAwesomeIcon icon={faPowerOff} />}
+                size='xs'>
                 Log out
             </Button>
         </Flex>

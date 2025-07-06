@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { MantineProvider } from '@mantine/core';
+import { ModalsProvider } from '@mantine/modals';
 import { UserProvider } from './context/UserContext.tsx';
 
 // components
@@ -30,11 +31,13 @@ const router = createBrowserRouter([
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
         <MantineProvider theme={theme}>
-            <QueryClientProvider client={queryClient}>
-                <UserProvider>
-                    <RouterProvider router={router} />
-                </UserProvider>
-            </QueryClientProvider>
+            <ModalsProvider>
+                <QueryClientProvider client={queryClient}>
+                    <UserProvider>
+                        <RouterProvider router={router} />
+                    </UserProvider>
+                </QueryClientProvider>
+            </ModalsProvider>
         </MantineProvider>
     </StrictMode>,
 );

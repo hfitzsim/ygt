@@ -33,7 +33,6 @@ const AddGoal: React.FC<AddGoalProps> = ({
                         {...form.getInputProps('goal')}
                     />
                     <NumberInput
-                        withAsterisk
                         label='Count'
                         description='Completed progress towards your goal'
                         min={0}
