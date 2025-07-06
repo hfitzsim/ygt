@@ -25,6 +25,7 @@ import {
     faEllipsis,
 } from '@fortawesome/free-solid-svg-icons';
 import { SetProgressCount } from './SetProgressCount.tsx';
+import { ProgressCalendar } from './Calendar.tsx';
 
 const Progress = () => {
     const navigate = useNavigate();
@@ -83,22 +84,25 @@ const Progress = () => {
                         </Menu.Dropdown>
                     </Menu>
                 </Group>
-                <RingProgress
-                    roundCaps
-                    size={280}
-                    thickness={20}
-                    sections={[
-                        {
-                            value: (goal?.count / goal?.goal) * 100,
-                            color: goal?.count === 0 ? 'grey' : 'teal',
-                        },
-                    ]}
-                    label={
-                        <Text c='jet' fw={200} ta='center' size='md'>
-                            {goal?.count} / {goal?.goal} days
-                        </Text>
-                    }
-                />{' '}
+                <Group>
+                    <RingProgress
+                        roundCaps
+                        size={280}
+                        thickness={20}
+                        sections={[
+                            {
+                                value: (goal?.count / goal?.goal) * 100,
+                                color: goal?.count === 0 ? 'grey' : 'teal',
+                            },
+                        ]}
+                        label={
+                            <Text c='jet' fw={200} ta='center' size='md'>
+                                {goal?.count} / {goal?.goal} days
+                            </Text>
+                        }
+                    />
+                </Group>
+
                 <Group>
                     <Button
                         onClick={handleDecrementProgress}

@@ -12,9 +12,10 @@ import Progress from './components/Progress.tsx';
 import ResetPW from './components/ResetPW.tsx';
 
 // styles
-import theme from './styles/theme.ts';
 import './index.scss';
 import '@mantine/core/styles.css';
+import '@mantine/dates/styles.css';
+import theme from './styles/theme.ts';
 
 const queryClient = new QueryClient();
 
