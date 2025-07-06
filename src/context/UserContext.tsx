@@ -11,6 +11,7 @@ import type { User } from '@supabase/supabase-js';
 interface UserContextType {
     user: User | null;
     loading: boolean;
+    logout: () => Promise<void>;
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
@@ -41,8 +42,14 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         };
     }, []);
 
+    const logout = async () => {
+        const { error } = await supabase.auth.signOut();
+        if (error) console.error('Logout error:', error);
+        setUser(null); // Optional, since auth listener will handle this too
+    };
+
     return (
-        <UserContext.Provider value={{ user, loading }}>
+        <UserContext.Provider value={{ user, loading, logout }}>
             {children}
         </UserContext.Provider>
     );
