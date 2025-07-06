@@ -54,7 +54,7 @@ const AuthForm = () => {
             password: form.getValues().password,
         };
 
-        const { data, error } =
+        const { error } =
             mode === 'signUp'
                 ? await supabase.auth.signUp({
                       ...creds,

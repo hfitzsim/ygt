@@ -25,7 +25,7 @@ import {
     faEllipsis,
 } from '@fortawesome/free-solid-svg-icons';
 import { SetProgressCount } from './SetProgressCount.tsx';
-import { ProgressCalendar } from './Calendar.tsx';
+// import { ProgressCalendar } from './Calendar.tsx';
 
 const Progress = () => {
     const navigate = useNavigate();
