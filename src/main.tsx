@@ -9,6 +9,7 @@ import { UserProvider } from './context/UserContext.tsx';
 // components
 import Root from './Root.tsx';
 import Progress from './components/Progress.tsx';
+import ResetPW from './components/ResetPW.tsx';
 
 // styles
 import theme from './styles/theme.ts';
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
     {
         path: '/ygt/:id',
         element: <Progress />,
+    },
+    {
+        path: '/ygt/reset-password',
+        element: <ResetPW />,
     },
 ]);
 

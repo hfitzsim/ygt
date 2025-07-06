@@ -8,12 +8,14 @@ import {
     PasswordInput,
     Button,
     Stack,
+    Text,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 
 const AuthForm = () => {
     const [visible, { toggle }] = useDisclosure(false);
     const [mode, setMode] = useState<'signIn' | 'signUp'>('signIn');
+    const [error, setError] = useState<string | null>(null);
 
     const form = useForm({
         initialValues: {
@@ -38,7 +40,6 @@ const AuthForm = () => {
     });
 
     const handleSubmit = async () => {
-        console.log('handleSubmit called');
         if (form.validate().hasErrors) {
             console.log('Form validation errors:', form.errors);
         }
@@ -67,6 +68,23 @@ const AuthForm = () => {
         }
     };
 
+    async function requestPasswordReset(email: string) {
+        setError(null);
+        const { data, error } = await supabase.auth.resetPasswordForEmail(
+            email,
+            {
+                redirectTo: 'https://hfitzsim.dev/ygt/reset-password',
+            },
+        );
+
+        if (error) {
+            setError('Error sending reset email:' + error.message.toString());
+            return;
+        }
+
+        console.log('Password reset email sent:', data);
+    }
+
     const toggleMode = () => {
         if (mode === 'signIn') {
             setMode('signUp');
@@ -90,7 +108,22 @@ const AuthForm = () => {
                     key={form.key('password')}
                     visible={visible}
                     onVisibilityChange={toggle}
+                    mb={0}
                 />
+                {mode === 'signIn' && (
+                    <Button
+                        variant='transparent'
+                        size='xs'
+                        c='blue'
+                        m={0}
+                        py={0}
+                        style={{ alignSelf: 'flex-end' }}
+                        onClick={() =>
+                            requestPasswordReset(form.getValues().email)
+                        }>
+                        Forgot Password
+                    </Button>
+                )}
                 {mode === 'signUp' && (
                     <PasswordInput
                         label='Confirm Password'
@@ -99,6 +132,15 @@ const AuthForm = () => {
                         visible={visible}
                         onVisibilityChange={toggle}
                     />
+                )}
+                {error && (
+                    <Text
+                        c='red'
+                        size='sm'
+                        fw={600}
+                        style={{ alignSelf: 'center' }}>
+                        {error}
+                    </Text>
                 )}
                 <Button onClick={handleSubmit}>
                     {mode === 'signUp' ? 'Sign Up' : 'Sign In'}
