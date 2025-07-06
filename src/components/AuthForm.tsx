@@ -58,7 +58,9 @@ const AuthForm = () => {
                 : await supabase.auth.signInWithPassword(creds);
 
         if (error) {
-            console.error(error);
+            if (error.message === 'Invalid login credentials') {
+                setError('Invalid email or password');
+            }
         } else {
             console.log(data);
             alert(
