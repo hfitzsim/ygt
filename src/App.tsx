@@ -9,6 +9,7 @@ import {
     Text,
     RingProgress,
     Checkbox,
+    ActionIcon,
 } from '@mantine/core';
 import { modals } from '@mantine/modals';
 import { AddGoal } from './components/AddGoal.tsx';
@@ -210,10 +211,19 @@ const App = () => {
                                     rightSection={
                                         <Menu>
                                             <Menu.Target>
-                                                <FontAwesomeIcon
-                                                    icon={faEllipsisVertical}
-                                                />
+                                                <ActionIcon
+                                                    w={20}
+                                                    mr={0}
+                                                    pr={0}
+                                                    variant='transparent'>
+                                                    <FontAwesomeIcon
+                                                        icon={
+                                                            faEllipsisVertical
+                                                        }
+                                                    />
+                                                </ActionIcon>
                                             </Menu.Target>
+
                                             <Menu.Dropdown>
                                                 <Menu.Item
                                                     onClick={() => {
